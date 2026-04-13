@@ -12,5 +12,8 @@ build/
 *.log
 *.tmp
 *.bak
+.env
+.env.*
+!.env.example
 
 assets/scss/*.css.map

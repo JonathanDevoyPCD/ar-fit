@@ -44,12 +44,43 @@ function getHomeScore() {
   return { planned, completed, score };
 }
 
-function renderHomeScore() {
+async function getRemoteHomeScore() {
+  if (!window.ARFIT_API || !window.ARFIT_API.isConfigured()) {
+    return null;
+  }
+
+  const { session } = await window.ARFIT_API.getSession();
+  if (!session) {
+    return null;
+  }
+
+  const weekKey = formatHomeWeekKey(getHomeWeekStart(new Date()));
+  const response = await window.ARFIT_API.getPlannerItems(weekKey);
+  const items = Array.isArray(response.items) ? response.items : [];
+  const planned = items.length;
+  const completed = items.filter((item) => item.status === "completed").length;
+  const score = planned > 0 ? Math.round((completed / planned) * 100) : 0;
+
+  return { planned, completed, score };
+}
+
+async function renderHomeScore() {
   if (!homeScoreValue || !homeScoreSummary || !homeScoreFill) {
     return;
   }
 
-  const { planned, completed, score } = getHomeScore();
+  let summary = getHomeScore();
+
+  try {
+    const remoteSummary = await getRemoteHomeScore();
+    if (remoteSummary) {
+      summary = remoteSummary;
+    }
+  } catch (error) {
+    summary = getHomeScore();
+  }
+
+  const { planned, completed, score } = summary;
   homeScoreValue.textContent = `${score}%`;
   homeScoreFill.style.width = `${score}%`;
 
@@ -61,4 +92,4 @@ function renderHomeScore() {
   homeScoreSummary.textContent = `${completed} of ${planned} items completed`;
 }
 
-renderHomeScore();
+void renderHomeScore();

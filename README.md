@@ -4,9 +4,11 @@ Adventure-racing inspired fitness web app with:
 - a homepage summary
 - a workout plan page
 - a meal plan page
+- an account page with email OTP auth flow
 - a weekly planner with add/edit/delete
 - completed/skipped tracking
 - weekly score calculation
+- backend-ready cloud planner persistence
 
 Repository:
 - GitHub: `https://github.com/JonathanDevoyPCD/ar-fit`
@@ -17,6 +19,8 @@ Repository:
 - HTML
 - SCSS/CSS
 - Vanilla JavaScript
+- Node.js / Express
+- PostgreSQL
 - `localStorage` for planner persistence
 
 ## Project Structure
@@ -26,11 +30,32 @@ Repository:
 |-- index.html
 |-- workout.html
 |-- meals.html
+|-- auth.html
 |-- planner.html
+|-- database
+|   `-- schema.sql
+|-- docs
+|   `-- backend-setup.md
+|-- server
+|   |-- app.js
+|   |-- config.js
+|   |-- db.js
+|   |-- index.js
+|   |-- middleware
+|   |   `-- auth.js
+|   |-- routes
+|   |   |-- auth.js
+|   |   `-- planner.js
+|   `-- utils
+|       |-- email.js
+|       `-- security.js
 `-- assets
     |-- fonts
     |-- img
     |-- js
+    |   |-- app-api.js
+    |   |-- app-config.js
+    |   |-- auth.js
     |   |-- home.js
     |   `-- planner.js
     `-- scss
@@ -40,14 +65,24 @@ Repository:
 
 ## Local Development
 
-This project is currently a static multi-page web app.
+This project is now a multi-page web app with a custom backend.
 
 ### Run locally
 
 1. Keep the folder structure intact.
-2. Open `index.html` in a browser, or use a local server in VS Code.
-3. Edit styles in `assets/scss/styles.scss`.
-4. Let your VS Code SCSS compiler output the compiled stylesheet to `assets/scss/styles.css`.
+2. Edit styles in `assets/scss/styles.scss`.
+3. Let your VS Code SCSS compiler output the compiled stylesheet to `assets/scss/styles.css`.
+4. Run the backend with:
+
+```powershell
+npm.cmd run dev
+```
+
+5. Open the app in your browser at:
+
+```text
+http://127.0.0.1:3000/
+```
 
 ### Important note
 
@@ -58,6 +93,19 @@ assets/scss/styles.css
 ```
 
 That compiled file is the runtime stylesheet the app uses in the browser.
+
+## Backend Setup
+
+The backend implementation is included, but it requires:
+- PostgreSQL
+- SMTP email credentials
+- a configured API base URL in `assets/js/app-config.js`
+
+Detailed setup steps are in:
+
+```text
+docs/backend-setup.md
+```
 
 ## Features
 
@@ -85,7 +133,16 @@ That compiled file is the runtime stylesheet the app uses in the browser.
 - Weekly score out of 100%
 - Swipe week navigation on touch devices
 - Default AR-FIT week loader
-- Per-week data saved in browser storage
+- Local browser storage fallback
+- Cloud sync support for authenticated users
+
+### Account
+
+- Register with username + email
+- Login with email
+- Verify via one-time password
+- Session-based auth via backend cookie
+- Import local planner data into account storage
 
 ## Screenshots
 
@@ -101,25 +158,18 @@ Once those files exist, add them here with standard Markdown image links.
 
 ## Deployment
 
-This app can be deployed as a static website.
+This project now has two deployment parts:
+
+- static frontend
+- Node.js backend
 
 ### GitHub Pages
 
-This repository now includes a GitHub Actions workflow for Pages deployment:
-
-- Workflow file: `.github/workflows/deploy-pages.yml`
-- Trigger: push to `main`
-- Expected URL: `https://jonathandevoypcd.github.io/ar-fit/`
-
-To finish enabling Pages in GitHub:
-
-1. Open `Settings > Pages`.
-2. Set `Source` to `GitHub Actions`.
-3. Push to `main` or manually run the workflow.
+The frontend is currently published directly from `main` and `/ (root)`.
 
 Notes:
-- The app uses relative links, which is compatible with project-site deployment.
-- If the repository remains private, GitHub Pages availability depends on your GitHub plan. If Pages is not available on the private repo, use Netlify or make the repo public.
+- The frontend uses relative links, which is compatible with project-site deployment.
+- The auth and planner sync features require a separately hosted backend API.
 
 ### Netlify
 
@@ -140,19 +190,30 @@ Recommended if you want fast static hosting with simple drag-and-drop or Git-bas
    - Build command: none
    - Publish directory: project root
 
+### Backend Hosting
+
+The backend cannot run on GitHub Pages.
+
+You need a Node-capable host for the API, for example:
+- Render
+- Railway
+- Fly.io
+- VPS / self-hosted Node server
+
 ## Planned Improvements
 
 - Export/import planner data
 - Template weeks and copy-last-week flows
 - Planner history and score trends
 - Better mobile install experience
+- Fully hosted backend deployment
 - Replacing external CDN assets with local bundled assets
 - Custom in-app confirm dialogs instead of browser confirms
 
 ## Repository Notes
 
 - Git is initialized on the `main` branch.
-- GitHub Pages workflow is included.
+- The frontend is published from GitHub Pages.
 - A restrictive `LICENSE` file is included for personal-project protection.
 - The repo remote is:
 

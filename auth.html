@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR-FIT | Account</title>
+  <meta name="description" content="Register or sign in to AR-FIT with email OTP and sync your planner data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="assets/scss/styles.css" />
+</head>
+<body>
+  <div class="app-logo-bar">
+    <a href="index.html" class="app-logo"><span class="logo-alt-a">a</span>R-FIT</a>
+  </div>
+  <div class="page-shell auth-shell">
+    <header class="page-header">
+      <div class="header-link-row">
+        <a href="index.html" class="back-link nav-home-link" aria-label="Home"><i class="fa-solid fa-house"></i></a>
+        <a href="workout.html" class="back-link secondary-link"><i class="fa-solid fa-dumbbell"></i> Workout Plan</a>
+        <a href="meals.html" class="back-link secondary-link"><i class="fa-solid fa-bowl-food"></i> Meal Plan</a>
+        <a href="planner.html" class="back-link secondary-link"><i class="fa-solid fa-calendar-check"></i> Planner</a>
+        <a href="auth.html" class="back-link secondary-link is-current" aria-current="page"><i class="fa-solid fa-user"></i> Account</a>
+      </div>
+      <div class="page-title-wrap">
+        <p class="eyebrow">AR-FIT</p>
+        <h1>Account Access</h1>
+        <p class="page-intro">Register or log in with email OTP. No password is stored in the app, and signed-in users can sync planner data across browsers and devices.</p>
+      </div>
+    </header>
+
+    <section class="auth-grid">
+      <article class="info-panel auth-card">
+        <div class="section-heading compact">
+          <p class="eyebrow">Account</p>
+          <h2 id="account-status-title">Sign In Or Register</h2>
+        </div>
+        <p id="account-status-copy">Use email OTP to create an account and keep your planner data attached to your profile.</p>
+        <div class="auth-user" id="account-user" hidden>
+          <strong id="account-username"></strong>
+          <span id="account-email"></span>
+        </div>
+        <div class="auth-actions">
+          <a class="primary-button full-width" href="planner.html" id="account-planner-link" hidden>Open Planner</a>
+          <button class="ghost-button full-width" type="button" id="sign-out-button" hidden>Sign Out</button>
+          <button class="ghost-button full-width" type="button" id="import-local-auth" hidden>Import Local Planner Data</button>
+        </div>
+      </article>
+
+      <article class="info-panel auth-card">
+        <div class="auth-switch">
+          <button class="ghost-button small auth-switch-button is-active" type="button" data-mode="register">Register</button>
+          <button class="ghost-button small auth-switch-button" type="button" data-mode="login">Login</button>
+          <button class="ghost-button small auth-switch-button" type="button" data-mode="verify">Verify OTP</button>
+        </div>
+
+        <form class="auth-form" id="register-form">
+          <label class="field">
+            <span>Username</span>
+            <input type="text" name="username" maxlength="24" placeholder="Choose a username" required />
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input type="email" name="email" maxlength="120" placeholder="you@example.com" required />
+          </label>
+          <button class="primary-button full-width" type="submit">Send Registration OTP</button>
+        </form>
+
+        <form class="auth-form" id="login-form" hidden>
+          <label class="field">
+            <span>Email</span>
+            <input type="email" name="email" maxlength="120" placeholder="you@example.com" required />
+          </label>
+          <button class="primary-button full-width" type="submit">Send Login OTP</button>
+        </form>
+
+        <form class="auth-form" id="verify-form" hidden>
+          <div class="auth-verify-copy">
+            <p>Email</p>
+            <strong id="verify-email">-</strong>
+            <small id="verify-purpose">-</small>
+          </div>
+          <label class="field">
+            <span>OTP Code</span>
+            <input type="text" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit code" required />
+          </label>
+          <button class="primary-button full-width" type="submit">Verify OTP</button>
+        </form>
+
+        <p class="auth-feedback" id="auth-feedback" aria-live="polite"></p>
+      </article>
+    </section>
+  </div>
+
+  <script src="assets/js/app-config.js"></script>
+  <script src="assets/js/app-api.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>
