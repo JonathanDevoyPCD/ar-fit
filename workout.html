@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR-FIT | Workout Plan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="assets/scss/styles.css" />
+</head>
+<body>
+  <div class="app-logo-bar">
+    <a href="index.html" class="app-logo"><span class="logo-alt-a">a</span>R-FIT</a>
+  </div>
+  <div class="page-shell">
+    <header class="page-header">
+      <div class="header-link-row">
+        <a href="index.html" class="back-link nav-home-link" aria-label="Home"><i class="fa-solid fa-house"></i></a>
+        <a href="workout.html" class="back-link secondary-link is-current" aria-current="page"><i class="fa-solid fa-dumbbell"></i> Workout Plan</a>
+        <a href="meals.html" class="back-link secondary-link"><i class="fa-solid fa-bowl-food"></i> Meal Plan</a>
+        <a href="planner.html" class="back-link secondary-link"><i class="fa-solid fa-calendar-check"></i> Planner</a>
+      </div>
+      <div class="page-title-wrap">
+        <p class="eyebrow">AR-FIT</p>
+        <h1>Workout Plan</h1>
+        <p class="page-intro">A clean weekly structure built around cycling, running, gym sessions, and recovery.</p>
+      </div>
+    </header>
+
+    <section class="overview-grid">
+      <article class="overview-card">
+        <i class="fa-solid fa-fire-flame-curved"></i>
+        <span>Main Goal</span>
+        <strong>Lose body fat</strong>
+      </article>
+      <article class="overview-card">
+        <i class="fa-solid fa-heart-pulse"></i>
+        <span>Conditioning</span>
+        <strong>Cardio + endurance</strong>
+      </article>
+      <article class="overview-card">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Support Work</span>
+        <strong>Gym / HIIT / mobility</strong>
+      </article>
+      <article class="overview-card">
+        <i class="fa-solid fa-bed"></i>
+        <span>Recovery</span>
+        <strong>Stretch + protect knee</strong>
+      </article>
+    </section>
+
+    <section class="content-grid">
+      <div class="main-column">
+        <div class="section-heading">
+          <p class="eyebrow">Weekly Split</p>
+          <h2>Training Schedule</h2>
+        </div>
+
+        <div class="schedule-grid">
+          <article class="day-card accent-red">
+            <div class="day-card-top">
+              <span>Monday</span>
+              <i class="fa-solid fa-person-biking"></i>
+            </div>
+            <h3>Cycle + Gym</h3>
+            <p>1 hour cycling session. Add 30 to 45 minutes of gym work later in the day if energy is good.</p>
+          </article>
+
+          <article class="day-card accent-green">
+            <div class="day-card-top">
+              <span>Tuesday</span>
+              <i class="fa-solid fa-person-running"></i>
+            </div>
+            <h3>Run + Core</h3>
+            <p>1 hour run. Finish with gentle core training and light lower-body mobility work.</p>
+          </article>
+
+          <article class="day-card accent-red">
+            <div class="day-card-top">
+              <span>Wednesday</span>
+              <i class="fa-solid fa-person-biking"></i>
+            </div>
+            <h3>Cycle + HIIT</h3>
+            <p>1 hour cycle. Optional 20 to 30 minute HIIT or upper-body gym session depending on recovery.</p>
+          </article>
+
+          <article class="day-card accent-green">
+            <div class="day-card-top">
+              <span>Thursday</span>
+              <i class="fa-solid fa-person-running"></i>
+            </div>
+            <h3>Run + Strength</h3>
+            <p>1 hour run. Add light strength work, keeping knee strain controlled and form focused.</p>
+          </article>
+
+          <article class="day-card accent-dark">
+            <div class="day-card-top">
+              <span>Friday</span>
+              <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <h3>Recovery Day</h3>
+            <p>Rest, stretch, walk lightly, and focus on hydration. Prioritize mobility and knee recovery.</p>
+          </article>
+
+          <article class="day-card accent-amber">
+            <div class="day-card-top">
+              <span>Saturday</span>
+              <i class="fa-solid fa-road"></i>
+            </div>
+            <h3>Long Ride</h3>
+            <p>Long cycle session around 3 hours. Keep intensity steady and fuel properly around the workout.</p>
+          </article>
+
+          <article class="day-card accent-dark">
+            <div class="day-card-top">
+              <span>Sunday</span>
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <h3>Reset</h3>
+            <p>Full rest or very light stretching. Let the body recover before starting the next week.</p>
+          </article>
+        </div>
+      </div>
+
+      <aside class="side-column">
+        <div class="info-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Best Time</p>
+            <h2>Evening Training</h2>
+          </div>
+          <p>Gym sessions are best placed around 5:00 PM to 5:30 PM. Keep meals and supplements structured around that slot.</p>
+        </div>
+
+        <div class="info-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Quick Notes</p>
+            <h2>Training Rules</h2>
+          </div>
+          <ul class="clean-list">
+            <li>Do not chase intensity when the knee feels unstable.</li>
+            <li>Use gym work to support fat loss, posture, and strength.</li>
+            <li>Keep recovery days honest and light.</li>
+            <li>Stay consistent before trying to do more.</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+  </div>
+</body>
+</html>

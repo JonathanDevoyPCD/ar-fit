@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR-FIT | Weekly Planner</title>
+  <meta name="description" content="Plan workouts and meals, mark items completed or skipped, and track your weekly score." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="assets/scss/styles.css" />
+</head>
+<body>
+  <div class="app-logo-bar">
+    <a href="index.html" class="app-logo"><span class="logo-alt-a">a</span>R-FIT</a>
+  </div>
+  <div class="page-shell planner-shell">
+    <header class="page-header">
+      <div class="header-link-row">
+        <a href="index.html" class="back-link nav-home-link" aria-label="Home"><i class="fa-solid fa-house"></i></a>
+        <a href="workout.html" class="back-link secondary-link"><i class="fa-solid fa-dumbbell"></i> Workout Plan</a>
+        <a href="meals.html" class="back-link secondary-link"><i class="fa-solid fa-bowl-food"></i> Meal Plan</a>
+        <a href="planner.html" class="back-link secondary-link is-current" aria-current="page"><i class="fa-solid fa-calendar-check"></i> Planner</a>
+      </div>
+      <div class="page-title-wrap">
+        <p class="eyebrow">AR-FIT</p>
+        <h1>Weekly Planner</h1>
+        <p class="page-intro">Build each week your way, update items as you go, and see exactly how much of the plan you completed.</p>
+      </div>
+    </header>
+
+    <section class="planner-toolbar">
+      <div class="planner-weekbar">
+        <div class="week-controls">
+          <button class="ghost-button" type="button" id="prev-week"><i class="fa-solid fa-chevron-left"></i> <span class="week-nav-label">Previous</span></button>
+          <button class="ghost-button" type="button" id="current-week">This Week</button>
+          <button class="ghost-button" type="button" id="next-week"><span class="week-nav-label">Next</span> <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="week-title">
+          <p class="eyebrow">Current Week</p>
+          <h2 id="week-label">Week of ...</h2>
+          <p id="week-caption">Track your workouts and meals day by day.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="planner-layout">
+      <div class="planner-main">
+        <div class="planner-calendar">
+          <div class="section-heading compact">
+            <p class="eyebrow">Weekly Calendar</p>
+            <h2>Plan The Week</h2>
+          </div>
+          <div class="week-grid" id="week-grid"></div>
+        </div>
+      </div>
+
+      <aside class="planner-sidebar">
+        <div class="info-panel planner-panel score-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Weekly Score</p>
+            <h2>Progress</h2>
+          </div>
+          <div class="score-ring">
+            <strong id="score-value">0%</strong>
+            <span>Completed</span>
+          </div>
+          <div class="score-breakdown">
+            <article class="score-stat">
+              <span>Planned</span>
+              <strong id="planned-count">0</strong>
+            </article>
+            <article class="score-stat">
+              <span>Completed</span>
+              <strong id="completed-count">0</strong>
+            </article>
+            <article class="score-stat">
+              <span>Skipped</span>
+              <strong id="skipped-count">0</strong>
+            </article>
+            <article class="score-stat">
+              <span>Pending</span>
+              <strong id="pending-count">0</strong>
+            </article>
+          </div>
+          <p class="score-note">Your score is based on completed items divided by all planned items for this week.</p>
+        </div>
+
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Add Or Edit</p>
+            <h2 id="form-heading">New Item</h2>
+          </div>
+          <form id="planner-form" class="planner-form">
+            <input type="hidden" name="itemId" />
+            <label class="field">
+              <span>Type</span>
+              <select name="type">
+                <option value="workout">Workout</option>
+                <option value="meal">Meal</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Day</span>
+              <select name="day">
+                <option value="0">Monday</option>
+                <option value="1">Tuesday</option>
+                <option value="2">Wednesday</option>
+                <option value="3">Thursday</option>
+                <option value="4">Friday</option>
+                <option value="5">Saturday</option>
+                <option value="6">Sunday</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Time</span>
+              <input type="time" name="time" />
+            </label>
+            <label class="field">
+              <span>Title</span>
+              <input type="text" name="title" maxlength="60" placeholder="e.g. Cycle + Gym" required />
+            </label>
+            <label class="field">
+              <span>Notes</span>
+              <textarea name="notes" rows="4" maxlength="220" placeholder="Optional notes, targets, or meal details"></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="primary-button" type="submit" id="save-item">Save Item</button>
+              <button class="ghost-button" type="button" id="cancel-edit" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <p class="planner-feedback" id="planner-feedback" aria-live="polite"></p>
+        </div>
+
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Quick Start</p>
+            <h2>Default Week</h2>
+          </div>
+          <p>Use the built-in AR-FIT starter plan, then edit anything you want. It adds workouts plus one simple meal target each day.</p>
+          <button class="ghost-button full-width" type="button" id="load-defaults">Load Default AR-FIT Week</button>
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <script src="assets/js/planner.js"></script>
+</body>
+</html>
