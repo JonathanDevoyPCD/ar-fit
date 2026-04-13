@@ -8,6 +8,10 @@ Adventure-racing inspired fitness web app with:
 - completed/skipped tracking
 - weekly score calculation
 
+Repository:
+- GitHub: `https://github.com/JonathanDevoyPCD/ar-fit`
+- Planned Pages URL: `https://jonathandevoypcd.github.io/ar-fit/`
+
 ## Tech Stack
 
 - HTML
@@ -101,20 +105,21 @@ This app can be deployed as a static website.
 
 ### GitHub Pages
 
-Recommended if you want a simple free host directly from this repo.
+This repository now includes a GitHub Actions workflow for Pages deployment:
 
-1. Push the repo to GitHub.
-2. In GitHub, open `Settings > Pages`.
-3. Under `Build and deployment`, set:
-   - `Source`: `Deploy from a branch`
-   - `Branch`: `main`
-   - `Folder`: `/ (root)`
-4. Save.
-5. GitHub will publish the site on a `github.io` URL.
+- Workflow file: `.github/workflows/deploy-pages.yml`
+- Trigger: push to `main`
+- Expected URL: `https://jonathandevoypcd.github.io/ar-fit/`
+
+To finish enabling Pages in GitHub:
+
+1. Open `Settings > Pages`.
+2. Set `Source` to `GitHub Actions`.
+3. Push to `main` or manually run the workflow.
 
 Notes:
-- This project uses relative links, so it works best when served from the site root.
-- If you later serve it from a subpath, test all links carefully.
+- The app uses relative links, which is compatible with project-site deployment.
+- If the repository remains private, GitHub Pages availability depends on your GitHub plan. If Pages is not available on the private repo, use Netlify or make the repo public.
 
 ### Netlify
 
@@ -147,9 +152,10 @@ Recommended if you want fast static hosting with simple drag-and-drop or Git-bas
 ## Repository Notes
 
 - Git is initialized on the `main` branch.
+- GitHub Pages workflow is included.
+- A restrictive `LICENSE` file is included for personal-project protection.
 - The repo remote is:
 
 ```text
 https://github.com/JonathanDevoyPCD/ar-fit
 ```
-
