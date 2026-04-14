@@ -9,6 +9,13 @@ function isWeekStart(value) {
   return /^\d{4}-\d{2}-\d{2}$/.test(String(value || ""));
 }
 
+function normalizeWeekStartValue(value) {
+  if (value instanceof Date) {
+    return value.toISOString().slice(0, 10);
+  }
+  return String(value || "").slice(0, 10);
+}
+
 function normalizePlannerInput(payload = {}) {
   return {
     weekStart: String(payload.weekStart || "").trim(),
@@ -111,18 +118,6 @@ router.post("/items", async (req, res, next) => {
 
 router.patch("/items/:itemId", async (req, res, next) => {
   const item = normalizePlannerInput(req.body);
-  const requireWeekStart = typeof req.body.weekStart !== "undefined";
-  const validationError = validatePlannerInput(
-    {
-      ...item,
-      weekStart: requireWeekStart ? item.weekStart : "2000-01-03",
-    },
-    { requireWeekStart }
-  );
-
-  if (validationError) {
-    return res.status(400).json({ error: validationError });
-  }
 
   try {
     const existing = await db.query(
@@ -150,6 +145,19 @@ router.patch("/items/:itemId", async (req, res, next) => {
       notes: typeof req.body.notes === "undefined" ? current.notes : item.notes,
       status: typeof req.body.status === "undefined" ? current.status : item.status,
     };
+
+    const validationError = validatePlannerInput({
+      weekStart: normalizeWeekStartValue(nextValues.weekStart),
+      day: nextValues.day,
+      type: nextValues.type,
+      title: nextValues.title,
+      notes: nextValues.notes,
+      status: nextValues.status,
+    });
+
+    if (validationError) {
+      return res.status(400).json({ error: validationError });
+    }
 
     const { rows } = await db.query(
       `

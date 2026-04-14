@@ -98,7 +98,7 @@ That compiled file is the runtime stylesheet the app uses in the browser.
 
 The backend implementation is included, but it requires:
 - PostgreSQL
-- SMTP email credentials
+- email delivery credentials (SMTP or Resend)
 - a configured API base URL in `assets/js/app-config.js`
 
 Detailed setup steps are in:
@@ -199,6 +199,8 @@ You need a Node-capable host for the API, for example:
 - Railway
 - Fly.io
 - VPS / self-hosted Node server
+
+This repo includes a Render blueprint at `render.yaml` for baseline API deployment.
 
 ## Planned Improvements
 

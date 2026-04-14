@@ -15,12 +15,18 @@ npm.cmd install
 
 Copy `.env.example` to `.env` and fill in:
 - `DATABASE_URL`
-- `SMTP_HOST`
-- `SMTP_PORT`
-- `SMTP_SECURE`
-- `SMTP_USER`
-- `SMTP_PASS`
 - `EMAIL_FROM`
+
+Email provider options:
+- SMTP mode (`EMAIL_PROVIDER=smtp`)
+  - `SMTP_HOST`
+  - `SMTP_PORT`
+  - `SMTP_SECURE`
+  - `SMTP_USER`
+  - `SMTP_PASS`
+- Resend mode (`EMAIL_PROVIDER=resend`)
+  - `RESEND_API_KEY`
+  - optional `RESEND_API_URL` (defaults to `https://api.resend.com/emails`)
 
 ## 3. Create PostgreSQL database
 
@@ -65,12 +71,22 @@ For production GitHub Pages, include:
 
 ## 7. OTP email notes
 
-The backend uses SMTP via Nodemailer.
+The backend supports:
+- SMTP via Nodemailer (`EMAIL_PROVIDER=smtp`)
+- Resend API (`EMAIL_PROVIDER=resend`)
 
-That means you need valid email delivery credentials before OTP login can work.
+You need valid delivery credentials before OTP login can work.
 
 ## 8. Recommended next infrastructure choices
 
 - PostgreSQL hosting: local Postgres first, then managed hosting later
 - Email provider: SMTP account or transactional email provider
 - Backend hosting later: Render, Railway, Fly.io, or a VPS
+
+## 9. Production deployment baseline
+
+For production:
+- set `NODE_ENV=production`
+- set a hosted `DATABASE_URL`
+- set `FRONTEND_ORIGINS` to your real frontend URL(s)
+- set `DATABASE_SSL=true` if your hosted PostgreSQL requires SSL
