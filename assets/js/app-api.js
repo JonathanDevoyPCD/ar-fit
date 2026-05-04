@@ -107,5 +107,62 @@
         body: JSON.stringify({ data }),
       });
     },
+    getPublicCourses() {
+      return request("/courses/public/list", { method: "GET" });
+    },
+    getPublicCourse(slug) {
+      return request(`/courses/public/${encodeURIComponent(slug)}`, { method: "GET" });
+    },
+    getPublicCourseGeoJson(slug) {
+      return request(`/courses/public/${encodeURIComponent(slug)}/export.geojson`, { method: "GET" });
+    },
+    getMyCourses() {
+      return request("/courses/mine", { method: "GET" });
+    },
+    createCourse(payload) {
+      return request("/courses", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+    },
+    getCourse(courseId) {
+      return request(`/courses/${encodeURIComponent(courseId)}`, { method: "GET" });
+    },
+    updateCourse(courseId, payload) {
+      return request(`/courses/${encodeURIComponent(courseId)}`, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+      });
+    },
+    upsertLeg(courseId, payload) {
+      return request(`/courses/${encodeURIComponent(courseId)}/legs`, {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+    },
+    updateLeg(courseId, legId, payload) {
+      return request(`/courses/${encodeURIComponent(courseId)}/legs/${encodeURIComponent(legId)}`, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+      });
+    },
+    upsertCheckpoint(courseId, payload) {
+      return request(`/courses/${encodeURIComponent(courseId)}/checkpoints`, {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+    },
+    updateCheckpoint(courseId, checkpointId, payload) {
+      return request(`/courses/${encodeURIComponent(courseId)}/checkpoints/${encodeURIComponent(checkpointId)}`, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+      });
+    },
+    upsertTransition(courseId, payload) {
+      return request(`/courses/${encodeURIComponent(courseId)}/transitions`, {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+    },
   };
 })();

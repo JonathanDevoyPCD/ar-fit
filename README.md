@@ -9,6 +9,8 @@ Adventure-racing inspired fitness web app with:
 - completed/skipped tracking
 - weekly score calculation
 - backend-ready cloud planner persistence
+- public virtual race courses with map views
+- organizer course builder for legs, checkpoints, and transitions
 
 Repository:
 - GitHub: `https://github.com/JonathanDevoyPCD/ar-fit`
@@ -143,6 +145,19 @@ docs/backend-setup.md
 - Verify via one-time password
 - Session-based auth via backend cookie
 - Import local planner data into account storage
+- Optional organizer access via `ORGANIZER_EMAILS`
+
+### Virtual Courses
+
+- Public course directory (`courses.html`)
+- Public course detail map (`course.html`)
+- GPX and GeoJSON download endpoints
+- Printable course sheet (`course-print.html`)
+- Organizer builder (`course-builder.html`) for:
+  - course metadata and publish status
+  - leg definitions
+  - checkpoint placement and sequence
+  - transition definitions
 
 ## Screenshots
 

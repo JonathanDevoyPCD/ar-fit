@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR-FIT | Course Print</title>
+  <meta name="description" content="Printable course sheet for virtual adventure race training routes." />
+  <link rel="stylesheet" href="assets/scss/styles.css" />
+</head>
+<body class="print-body">
+  <main class="print-sheet">
+    <header class="print-header">
+      <h1 id="print-title">Course</h1>
+      <p id="print-region"></p>
+      <p id="print-description"></p>
+    </header>
+
+    <section class="print-section">
+      <h2>Legs</h2>
+      <div id="print-legs"></div>
+    </section>
+
+    <section class="print-section">
+      <h2>Checkpoints</h2>
+      <table class="print-table">
+        <thead>
+          <tr>
+            <th>Leg</th>
+            <th>Seq</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Radius m</th>
+          </tr>
+        </thead>
+        <tbody id="print-checkpoints"></tbody>
+      </table>
+    </section>
+
+    <section class="print-section">
+      <h2>Transitions</h2>
+      <div id="print-transitions"></div>
+    </section>
+  </main>
+
+  <script src="assets/js/app-config.js"></script>
+  <script src="assets/js/app-api.js"></script>
+  <script src="assets/js/course-print.js"></script>
+</body>
+</html>

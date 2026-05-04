@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR-FIT | Course Detail</title>
+  <meta name="description" content="View a virtual adventure race course map, checkpoints, transitions, and downloadable route files." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="assets/scss/styles.css" />
+</head>
+<body>
+  <div class="app-logo-bar">
+    <a href="index.html" class="app-logo"><span class="logo-alt-a">a</span>R-FIT</a>
+  </div>
+  <div class="page-shell">
+    <header class="page-header">
+      <div class="header-link-row">
+        <a href="index.html" class="back-link nav-home-link" aria-label="Home"><i class="fa-solid fa-house"></i></a>
+        <a href="workout.html" class="back-link secondary-link"><i class="fa-solid fa-dumbbell"></i> Workout Plan</a>
+        <a href="meals.html" class="back-link secondary-link"><i class="fa-solid fa-bowl-food"></i> Meal Plan</a>
+        <a href="planner.html" class="back-link secondary-link"><i class="fa-solid fa-calendar-check"></i> Planner</a>
+        <a href="courses.html" class="back-link secondary-link is-current" aria-current="page"><i class="fa-solid fa-route"></i> Courses</a>
+        <a href="course-builder.html" class="back-link secondary-link"><i class="fa-solid fa-pen-ruler"></i> Builder</a>
+        <a href="auth.html" class="back-link secondary-link"><i class="fa-solid fa-user"></i> Account</a>
+      </div>
+      <div class="page-title-wrap">
+        <p class="eyebrow">Virtual Adventure Race</p>
+        <h1 id="course-title">Course</h1>
+        <p class="page-intro" id="course-description">Loading course...</p>
+      </div>
+    </header>
+
+    <section class="course-layout">
+      <article class="planner-weekbar">
+        <div class="section-heading compact">
+          <p class="eyebrow">Map</p>
+          <h2>Course Overview</h2>
+        </div>
+        <div id="course-map" class="course-map"></div>
+        <p class="score-note">Map data © OpenStreetMap contributors.</p>
+      </article>
+
+      <aside class="planner-sidebar">
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Downloads</p>
+            <h2>Route Files</h2>
+          </div>
+          <div class="auth-actions">
+            <a id="download-geojson" class="ghost-button full-width" href="#" target="_blank" rel="noopener">Download GeoJSON</a>
+            <a id="download-gpx" class="ghost-button full-width" href="#" target="_blank" rel="noopener">Download GPX</a>
+            <a id="print-course" class="ghost-button full-width" href="#">Print Course Sheet</a>
+          </div>
+        </div>
+
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Structure</p>
+            <h2>Legs & Checkpoints</h2>
+          </div>
+          <div id="course-legs" class="course-legs"></div>
+        </div>
+
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Transitions</p>
+            <h2>Discipline Changes</h2>
+          </div>
+          <div id="course-transitions" class="course-transitions"></div>
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="assets/js/app-config.js"></script>
+  <script src="assets/js/app-api.js"></script>
+  <script src="assets/js/course-detail.js"></script>
+</body>
+</html>

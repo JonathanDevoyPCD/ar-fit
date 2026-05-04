@@ -219,6 +219,7 @@ router.post("/verify-otp", authLimiter, async (req, res, next) => {
       }
 
       const userId = generateId();
+      const isOrganizer = config.organizerEmails.includes(email);
       await client.query(
         `
           INSERT INTO users (id, email, email_verified_at)
@@ -228,20 +229,21 @@ router.post("/verify-otp", authLimiter, async (req, res, next) => {
       );
       await client.query(
         `
-          INSERT INTO profiles (user_id, username)
-          VALUES ($1, $2)
+          INSERT INTO profiles (user_id, username, is_organizer)
+          VALUES ($1, $2, $3)
         `,
-        [userId, challenge.username]
+        [userId, challenge.username, isOrganizer]
       );
       user = {
         id: userId,
         email,
         username: challenge.username,
+        isOrganizer,
       };
     } else {
       const userResult = await client.query(
         `
-          SELECT u.id, u.email, p.username
+          SELECT u.id, u.email, p.username, p.is_organizer AS "isOrganizer"
           FROM users u
           LEFT JOIN profiles p ON p.user_id = u.id
           WHERE LOWER(u.email) = LOWER($1)
@@ -253,7 +255,11 @@ router.post("/verify-otp", authLimiter, async (req, res, next) => {
         await client.query("ROLLBACK");
         return res.status(404).json({ error: "No account exists for that email." });
       }
-      user = userResult.rows[0];
+      user = {
+        ...userResult.rows[0],
+        isOrganizer: Boolean(userResult.rows[0].isOrganizer)
+          || config.organizerEmails.includes(email),
+      };
     }
 
     await client.query(

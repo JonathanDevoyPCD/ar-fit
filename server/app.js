@@ -7,6 +7,7 @@ const config = require("./config");
 const { attachSession } = require("./middleware/auth");
 const authRoutes = require("./routes/auth");
 const plannerRoutes = require("./routes/planner");
+const courseRoutes = require("./routes/courses");
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.get("/api/health", (_req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/planner", plannerRoutes);
+app.use("/api/courses", courseRoutes);
 
 const staticRoot = process.cwd();
 app.use(express.static(staticRoot, {

@@ -1445,3 +1445,146 @@ button.day-toggle {
     border-radius: 20px;
   }
 }
+
+.course-directory,
+.course-list,
+.course-layout,
+.course-legs,
+.course-transitions,
+.course-meta,
+.course-builder-summary {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.course-list {
+  grid-template-columns: 1fr;
+}
+
+.course-card,
+.course-leg-card,
+.course-transition-card,
+.course-summary-card {
+  border: 1px solid $line;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+    $surface;
+  border-radius: 20px;
+  padding: 1rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.course-card h3,
+.course-leg-card h3,
+.course-transition-card h3,
+.course-summary-card h3 {
+  margin: 0;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.7rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.course-card p,
+.course-leg-card p,
+.course-transition-card p,
+.course-summary-card p {
+  margin: 0;
+  color: $text-muted;
+}
+
+.course-meta {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.course-meta span {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid $line;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: $text-muted;
+  font-size: 0.82rem;
+}
+
+.course-layout {
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.course-map {
+  width: 100%;
+  min-height: 340px;
+  border-radius: 18px;
+  border: 1px solid $line;
+  overflow: hidden;
+}
+
+.builder-sidebar .planner-panel {
+  min-width: 0;
+}
+
+.print-body {
+  background: #fff;
+  color: #111;
+}
+
+.print-sheet {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.25rem;
+  font-family: "Inter", sans-serif;
+}
+
+.print-header h1 {
+  margin: 0 0 0.5rem;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 2.4rem;
+  text-transform: uppercase;
+}
+
+.print-header p {
+  margin: 0.2rem 0;
+}
+
+.print-section {
+  margin-top: 1.1rem;
+}
+
+.print-section h2 {
+  margin: 0 0 0.5rem;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
+.print-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.print-table th,
+.print-table td {
+  border: 1px solid #d0d0d0;
+  padding: 0.45rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 680px) {
+  .course-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .course-layout {
+    grid-template-columns: minmax(0, 1.45fr) minmax(330px, 0.85fr);
+    gap: 1rem;
+  }
+
+  .builder-sidebar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

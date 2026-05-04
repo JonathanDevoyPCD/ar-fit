@@ -36,6 +36,11 @@ const frontendOrigins = (process.env.FRONTEND_ORIGINS || "")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
+const organizerEmails = (process.env.ORGANIZER_EMAILS || "")
+  .split(",")
+  .map((email) => email.trim().toLowerCase())
+  .filter(Boolean);
+
 module.exports = {
   port: getNumber("PORT", 3000),
   nodeEnv: process.env.NODE_ENV || "development",
@@ -55,4 +60,5 @@ module.exports = {
   emailProvider: (process.env.EMAIL_PROVIDER || "smtp").toLowerCase(),
   resendApiKey: process.env.RESEND_API_KEY || "",
   resendApiUrl: process.env.RESEND_API_URL || "https://api.resend.com/emails",
+  organizerEmails,
 };

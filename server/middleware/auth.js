@@ -18,7 +18,8 @@ async function attachSession(req, _res, next) {
           s.expires_at,
           u.id AS user_id,
           u.email,
-          p.username
+          p.username,
+          p.is_organizer
         FROM sessions s
         JOIN users u ON u.id = s.user_id
         LEFT JOIN profiles p ON p.user_id = u.id
@@ -43,12 +44,16 @@ async function attachSession(req, _res, next) {
       [rows[0].session_id]
     );
 
+    const isOrganizer = Boolean(rows[0].is_organizer)
+      || config.organizerEmails.includes(String(rows[0].email || "").toLowerCase());
+
     req.auth = {
       sessionId: rows[0].session_id,
       user: {
         id: rows[0].user_id,
         email: rows[0].email,
         username: rows[0].username,
+        isOrganizer,
       },
       token,
       tokenHash,

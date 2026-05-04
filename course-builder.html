@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR-FIT | Course Builder</title>
+  <meta name="description" content="Organizer interface for creating virtual adventure race training courses." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="assets/scss/styles.css" />
+</head>
+<body>
+  <div class="app-logo-bar">
+    <a href="index.html" class="app-logo"><span class="logo-alt-a">a</span>R-FIT</a>
+  </div>
+  <div class="page-shell">
+    <header class="page-header">
+      <div class="header-link-row">
+        <a href="index.html" class="back-link nav-home-link" aria-label="Home"><i class="fa-solid fa-house"></i></a>
+        <a href="workout.html" class="back-link secondary-link"><i class="fa-solid fa-dumbbell"></i> Workout Plan</a>
+        <a href="meals.html" class="back-link secondary-link"><i class="fa-solid fa-bowl-food"></i> Meal Plan</a>
+        <a href="planner.html" class="back-link secondary-link"><i class="fa-solid fa-calendar-check"></i> Planner</a>
+        <a href="courses.html" class="back-link secondary-link"><i class="fa-solid fa-route"></i> Courses</a>
+        <a href="course-builder.html" class="back-link secondary-link is-current" aria-current="page"><i class="fa-solid fa-pen-ruler"></i> Builder</a>
+        <a href="auth.html" class="back-link secondary-link"><i class="fa-solid fa-user"></i> Account</a>
+      </div>
+      <div class="page-title-wrap">
+        <p class="eyebrow">Organizer Workspace</p>
+        <h1>Course Builder</h1>
+        <p class="page-intro">Create draft courses, define legs and checkpoints, connect transitions, then publish for public practice use.</p>
+      </div>
+    </header>
+
+    <section class="course-layout">
+      <article class="planner-weekbar">
+        <div class="section-heading compact">
+          <p class="eyebrow">Builder Map</p>
+          <h2>Checkpoint Placement</h2>
+        </div>
+        <div id="builder-map" class="course-map"></div>
+        <p class="score-note">Click the map to populate checkpoint latitude and longitude.</p>
+      </article>
+
+      <aside class="planner-sidebar builder-sidebar">
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Session</p>
+            <h2 id="builder-access">Checking Access...</h2>
+          </div>
+          <p id="builder-access-copy">Verifying account permissions.</p>
+          <div class="auth-actions">
+            <a href="auth.html" class="ghost-button full-width">Open Account</a>
+          </div>
+        </div>
+
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Course</p>
+            <h2>Metadata</h2>
+          </div>
+          <form id="course-form" class="planner-form">
+            <label class="field">
+              <span>Saved Courses</span>
+              <select name="courseSelect" id="course-select"></select>
+            </label>
+            <label class="field">
+              <span>Name</span>
+              <input name="name" maxlength="80" placeholder="e.g. Forest Brick Session" required />
+            </label>
+            <label class="field">
+              <span>Region</span>
+              <input name="region" maxlength="80" placeholder="e.g. Pretoria East" />
+            </label>
+            <label class="field">
+              <span>Slug</span>
+              <input name="slug" maxlength="80" placeholder="forest-brick-session" />
+            </label>
+            <label class="field">
+              <span>Description</span>
+              <textarea name="description" rows="4" maxlength="1200"></textarea>
+            </label>
+            <label class="field">
+              <span>Status</span>
+              <select name="status">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </label>
+            <div class="form-actions">
+              <button type="button" id="create-course" class="primary-button">Create Course</button>
+              <button type="submit" class="ghost-button">Save Metadata</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Leg</p>
+            <h2>Add Or Update</h2>
+          </div>
+          <form id="leg-form" class="planner-form">
+            <label class="field"><span>Leg Index</span><input name="legIndex" type="number" min="1" required /></label>
+            <label class="field"><span>Name</span><input name="name" maxlength="80" required /></label>
+            <label class="field">
+              <span>Discipline</span>
+              <select name="discipline">
+                <option value="bike">Bike</option>
+                <option value="hike">Hike</option>
+                <option value="kayak">Kayak</option>
+                <option value="run">Run</option>
+                <option value="trek">Trek</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label class="field"><span>Target Minutes</span><input name="targetMinutes" type="number" min="0" /></label>
+            <label class="field"><span>Notes</span><textarea name="notes" rows="3" maxlength="400"></textarea></label>
+            <button class="ghost-button" type="submit">Save Leg</button>
+          </form>
+        </div>
+
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Checkpoint</p>
+            <h2>Add Or Update</h2>
+          </div>
+          <form id="checkpoint-form" class="planner-form">
+            <label class="field"><span>Leg</span><select name="legId" id="checkpoint-leg"></select></label>
+            <label class="field"><span>Sequence</span><input name="sequence" type="number" min="1" required /></label>
+            <label class="field"><span>Code</span><input name="code" maxlength="30" placeholder="CP1" required /></label>
+            <label class="field"><span>Name</span><input name="name" maxlength="80" required /></label>
+            <label class="field"><span>Latitude</span><input name="latitude" type="number" step="0.000001" required /></label>
+            <label class="field"><span>Longitude</span><input name="longitude" type="number" step="0.000001" required /></label>
+            <label class="field"><span>Radius (m)</span><input name="radiusM" type="number" min="5" max="200" value="25" required /></label>
+            <label class="field"><span>Notes</span><textarea name="notes" rows="2" maxlength="400"></textarea></label>
+            <button class="ghost-button" type="submit">Save Checkpoint</button>
+          </form>
+        </div>
+
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Transition</p>
+            <h2>Add Or Update</h2>
+          </div>
+          <form id="transition-form" class="planner-form">
+            <label class="field"><span>From Leg</span><select name="fromLegId" id="from-leg"></select></label>
+            <label class="field"><span>To Leg</span><select name="toLegId" id="to-leg"></select></label>
+            <label class="field">
+              <span>Discipline</span>
+              <select name="discipline">
+                <option value="bike">Bike</option>
+                <option value="hike">Hike</option>
+                <option value="kayak">Kayak</option>
+                <option value="run">Run</option>
+                <option value="trek">Trek</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label class="field"><span>Notes</span><textarea name="notes" rows="2" maxlength="400"></textarea></label>
+            <button class="ghost-button" type="submit">Save Transition</button>
+          </form>
+        </div>
+
+        <div class="info-panel planner-panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Summary</p>
+            <h2>Current Course</h2>
+          </div>
+          <div id="builder-summary" class="course-builder-summary"></div>
+          <p id="builder-feedback" class="planner-feedback"></p>
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="assets/js/app-config.js"></script>
+  <script src="assets/js/app-api.js"></script>
+  <script src="assets/js/course-builder.js"></script>
+</body>
+</html>

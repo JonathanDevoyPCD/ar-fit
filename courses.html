@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR-FIT | Virtual Courses</title>
+  <meta name="description" content="Browse public virtual adventure race training courses with legs, checkpoints, and transitions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="assets/scss/styles.css" />
+</head>
+<body>
+  <div class="app-logo-bar">
+    <a href="index.html" class="app-logo"><span class="logo-alt-a">a</span>R-FIT</a>
+  </div>
+  <div class="page-shell">
+    <header class="page-header">
+      <div class="header-link-row">
+        <a href="index.html" class="back-link nav-home-link" aria-label="Home"><i class="fa-solid fa-house"></i></a>
+        <a href="workout.html" class="back-link secondary-link"><i class="fa-solid fa-dumbbell"></i> Workout Plan</a>
+        <a href="meals.html" class="back-link secondary-link"><i class="fa-solid fa-bowl-food"></i> Meal Plan</a>
+        <a href="planner.html" class="back-link secondary-link"><i class="fa-solid fa-calendar-check"></i> Planner</a>
+        <a href="courses.html" class="back-link secondary-link is-current" aria-current="page"><i class="fa-solid fa-route"></i> Courses</a>
+        <a href="course-builder.html" class="back-link secondary-link"><i class="fa-solid fa-pen-ruler"></i> Builder</a>
+        <a href="auth.html" class="back-link secondary-link"><i class="fa-solid fa-user"></i> Account</a>
+      </div>
+      <div class="page-title-wrap">
+        <p class="eyebrow">Virtual Adventure Race</p>
+        <h1>Public Courses</h1>
+        <p class="page-intro">Use published legs, checkpoints, and transitions as structured training routes at your own pace.</p>
+      </div>
+    </header>
+
+    <section class="course-directory">
+      <div class="section-heading compact">
+        <p class="eyebrow">Find A Course</p>
+        <h2>Available Routes</h2>
+      </div>
+      <div id="courses-feedback" class="planner-feedback"></div>
+      <div id="course-list" class="course-list"></div>
+    </section>
+  </div>
+
+  <script src="assets/js/app-config.js"></script>
+  <script src="assets/js/app-api.js"></script>
+  <script src="assets/js/courses.js"></script>
+</body>
+</html>

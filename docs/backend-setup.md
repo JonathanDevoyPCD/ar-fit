@@ -4,6 +4,7 @@ This project now includes a custom Node.js backend for:
 - email OTP register/login
 - session cookies
 - PostgreSQL planner storage
+- virtual course management (organizer + public)
 
 ## 1. Install dependencies
 
@@ -16,6 +17,7 @@ npm.cmd install
 Copy `.env.example` to `.env` and fill in:
 - `DATABASE_URL`
 - `EMAIL_FROM`
+- optional `ORGANIZER_EMAILS` (comma-separated emails allowed to use `course-builder.html`)
 
 Email provider options:
 - SMTP mode (`EMAIL_PROVIDER=smtp`)
@@ -41,6 +43,8 @@ database/schema.sql
 ```
 
 You can apply it with `psql`, DBeaver, pgAdmin, or any PostgreSQL client.
+
+If you already had an older database, run `database/schema.sql` again to apply new `courses` tables and the `profiles.is_organizer` column.
 
 ## 5. Start the backend
 
@@ -90,3 +94,4 @@ For production:
 - set a hosted `DATABASE_URL`
 - set `FRONTEND_ORIGINS` to your real frontend URL(s)
 - set `DATABASE_SSL=true` if your hosted PostgreSQL requires SSL
+- set `ORGANIZER_EMAILS` to the accounts that should create or edit courses
